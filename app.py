@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import inspect
 
@@ -41,7 +41,7 @@ db.create_all()
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    return render_template('home.html')
 
 
 @app.route('/floor', methods=['GET'])

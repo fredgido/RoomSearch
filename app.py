@@ -1,11 +1,10 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import inspect
 
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'
-
-
 
 db = SQLAlchemy(app)
 
@@ -43,6 +42,12 @@ db.create_all()
 @app.route('/')
 def hello_world():
     return 'Hello World!'
+
+
+@app.route('/floor', methods=['GET'])
+def floorlist():
+    floors = Floor.query.all()
+    return jsonify([{'id': f.id, 'number': f.number, 'image_file': f.image_file, 'info': f.info} for f in floors])
 
 
 if __name__ == '__main__':

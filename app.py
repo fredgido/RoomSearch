@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import inspect
 
@@ -49,6 +49,13 @@ def hello_world():
 def floorlist():
     floors = Floor.query.all()
     return jsonify([{'id': f.id, 'number': f.number, 'image_file': f.image_file, 'info': f.info} for f in floors])
+
+
+@app.route('/room', methods=['GET'])
+def room_get():
+    name = request.args.get('search')
+    r = Room.query.filter_by(name=name).all()[0]
+    return jsonify({'id': r.id, 'room_type': r.room_type} )
 
 
 if __name__ == '__main__':

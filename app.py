@@ -23,6 +23,7 @@ class Floor(db.Model):
 class Room(db.Model):
     __tablename__ = 'room'
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(256))
     map_position_x = db.Column(db.Float)
     map_position_y = db.Column(db.Float)
     room_type = db.Column(db.String(256))

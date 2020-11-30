@@ -55,7 +55,9 @@ def floorlist():
 def room_get():
     name = request.args.get('search')
     r = Room.query.filter_by(name=name).all()[0]
-    return jsonify({'id': r.id, 'room_type': r.room_type} )
+    return jsonify({'id': r.id, 'room_type': r.room_type, 'map_position_x': r.map_position_x,
+                    'map_position_y': r.map_position_y,'capacity':r.capacity
+                    } )
 
 
 if __name__ == '__main__':

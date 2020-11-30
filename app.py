@@ -44,6 +44,10 @@ db.create_all()
 def hello_world():
     return render_template('home.html')
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 
 @app.route('/floor', methods=['GET'])
 def floorlist():

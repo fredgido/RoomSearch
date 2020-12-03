@@ -5,6 +5,8 @@ from flask_admin.contrib.sqla import ModelView
 
 app = Flask(__name__)
 
+app.secret_key = "SECRET_TESTING"
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'
 
 # set optional bootswatch theme

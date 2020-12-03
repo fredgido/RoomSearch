@@ -1,10 +1,15 @@
 from flask import Flask, jsonify, render_template, request
+from flask_admin import Admin
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import inspect
+from flask_admin.contrib.sqla import ModelView
 
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'
+
+# set optional bootswatch theme
+app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
+
 
 db = SQLAlchemy(app)
 
@@ -39,10 +44,15 @@ class Room(db.Model):
 
 db.create_all()
 
+admin = Admin(app, name='microblog', template_mode='bootstrap3')
+admin.add_view(ModelView(Floor, db.session))
+admin.add_view(ModelView(Room, db.session))
+
 
 @app.route('/')
 def hello_world():
     return render_template('home.html')
+
 
 @app.route('/t')
 def index():
@@ -63,8 +73,8 @@ def room_get():
         return jsonify({}), 404
     r = r[0]
     return jsonify({'id': r.id, 'room_type': r.room_type, 'map_position_x': r.map_position_x,
-                    'map_position_y': r.map_position_y,'capacity':r.capacity
-                    } )
+                    'map_position_y': r.map_position_y, 'capacity': r.capacity
+                    })
 
 
 @app.route("/room", methods=['POST'])

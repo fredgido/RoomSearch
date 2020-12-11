@@ -66,22 +66,14 @@ def floorlist():
     floors = Floor.query.all()
     return jsonify([{'id': f.id, 'number': f.number, 'image_file': f.image_file, 'info': f.info} for f in floors])
 
-
-@app.route('/room', methods=['GET'])
-def room_get():
-    name = request.args.get('search')
-    r = Room.query.filter_by(name=name).all()
-    if len(r) < 1:
-        return jsonify({}), 404
-    r = r[0]
-    return render_template('index2.html',
-        id = r.id,
-        room_type = r.room_type,
-        map_position_x = r.map_position_x,
-        map_position_y = r.map_position_y,
-        capacity = r.capacity
-    )
-
+#
+# @app.route('/room', methods=['GET'])
+# def room_get():
+#     name = request.args.get('search')
+#     r = Room.query.filter_by(name=name).all()
+#     if len(r) < 1:
+#         return jsonify({}), 404
+#     r = r[0]
 
 
     #name = request.args.get('search')
@@ -94,15 +86,17 @@ def room_get():
                  #   })
 
 
-@app.route("/room", methods=['POST'])
-def item_save():
-    try:
-        new_item = Room(**request.form)
-        db.session.add(new_item)
-        db.session.commit()
-    except BaseException as error:
-        return str(error), 400
-    return "success", 200
+@app.route("/room", methods=['GET'])
+def room_get():
+    name = request.args.get('search')
+    r = Room.query.filter_by(name=name).all()[0]
+    return render_template('index2.html',
+        id = r.id,
+        room_type = r.room_type,
+        map_position_x = r.map_position_x,
+        map_position_y = r.map_position_y,
+        capacity = r.capacity
+    )
 
 
 if __name__ == '__main__':

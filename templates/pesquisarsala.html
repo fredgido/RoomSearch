@@ -6,8 +6,8 @@
 	<!-- Mobile Specific Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<!-- Main Style Css -->
-	<!--<link rel="stylesheet" href="{{ url_for('static', filename='newstyle.css') }}"/>-->
-	<link rel="stylesheet" href="../static/newstyle.css"/>
+	<link rel="stylesheet" href="{{ url_for('static', filename='newstyle.css') }}"/>
+
 
 
 	<script>
@@ -41,14 +41,15 @@
 				<img  width="600" src="{{ url_for('static', filename='floor_0.jpg') }}" alt="">
 			</div>
 			<form class="form-detail" id="result">
-				<h2>PESQUISA DE SALA</h2>
-				<div class="form-row">
-					<div class="form-row form-row-1">
-						<label for="id">Nome da sala</label>
-						<input type="text" id="room_name" name="room_name" value="S01" class="input-text">
-					</div>
-                <div class="form-row-last">
-                    <input  name="register" id="search" onclick="myFunction()" class="register" value="Procurar">
+                <h2>PESQUISA DE SALA</h2>
+                <div class="form-group">
+                    <div class="form-row form-row-1">
+                        <label for="id">Nome da sala</label>
+                        <input type="text" id="room_name" name="room_name" value="S01" class="input-text">
+                    </div>
+                    <div style="" class="form-row form-row-1"><br>
+                        <input  name="register" id="search" onclick="myFunction()" class="register" value="Procurar">
+                    </div>
                 </div>
 			</form>
 		</div>

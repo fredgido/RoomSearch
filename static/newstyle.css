@@ -20,7 +20,9 @@ body {
 }
 .form-v4-content  {
 	background: #fff;
-	width: 1850px;
+	width: 70%;
+    height: 70%;
+    min-height: 55vh;
 	border-radius: 10px;
 	-o-border-radius: 10px;
 	-ms-border-radius: 10px;
